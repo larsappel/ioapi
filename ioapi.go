@@ -6,22 +6,22 @@ import (
 	"net/http"
 )
 
-// Get makes api GET requests for JSON
-// func GetJson(baseURL string, endpoint string, params string, header map[string]string) ([]byte, error) {
-func GetJson(url string, header map[string]string) ([]byte, error) {
+// GetJson makes an api GET request and returns a JSON payload
+func GetJson(reqUrl string, reqHeader map[string]string) ([]byte, error) {
 
-	// reqUrl := baseURL + endpoint + "?" + params
+	// Prepare the request
 	httpClient := &http.Client{}
 
-	req, err := http.NewRequest("GET", url, nil)
+	req, err := http.NewRequest("GET", reqUrl, nil)
 	if err != nil {
 		log.Println(err)
 	}
 
-	for k, v := range header {
+	for k, v := range reqHeader {
 		req.Header.Add(k, v)
 	}
 
+	// Make the request
 	res, err := httpClient.Do(req)
 	if err != nil || res.StatusCode != http.StatusOK {
 		log.Println("Call returned:", err)
