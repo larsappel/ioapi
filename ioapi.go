@@ -1,20 +1,19 @@
 package ioapi
 
 import (
-	"fmt"
 	"io"
 	"log"
 	"net/http"
 )
 
 // Get makes api GET requests for JSON
-func GetJson(baseURL string, endpoint string, params string, header map[string]string) ([]byte, error) {
+// func GetJson(baseURL string, endpoint string, params string, header map[string]string) ([]byte, error) {
+func GetJson(url string, header map[string]string) ([]byte, error) {
 
-	reqUrl := baseURL + endpoint + "?" + params
-	fmt.Println(reqUrl)
+	// reqUrl := baseURL + endpoint + "?" + params
 	httpClient := &http.Client{}
 
-	req, err := http.NewRequest("GET", reqUrl, nil)
+	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		log.Println(err)
 	}
